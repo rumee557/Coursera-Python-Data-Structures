@@ -1,0 +1,21 @@
+name = input("Enter file:")
+if len(name) < 1 : name = "mbox-short.txt"
+handle = open(name)
+mail=dict()
+
+for line in handle:
+    line.rstrip()
+    if line.startswith('From '):
+        words=line.split()
+        words=words[1]
+        mail[words]=mail.get(words,0)+1
+        
+maxword=None
+maxcount=None
+
+for word,count in mail.items():
+    if maxcount is None or count>maxcount:
+        maxword=word
+        maxcount=count
+        
+print(maxword,maxcount)
